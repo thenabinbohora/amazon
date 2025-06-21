@@ -6,7 +6,7 @@ export function addToCart(productId) {
     const quantity = Number(quantitySelector.value);
     cart.forEach((cartItem) => {
         if (cartItem.productId === productId) {
-            matchingItem = cartItemtem;
+            matchingItem = cartItem;
         };
     });
     if (matchingItem) {
@@ -33,5 +33,25 @@ export function removeFromCart(productId) {
     });
 
     cart = newCart;
+    saveToStorage();
+}
+
+export function calculateCartQuantity() {
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+    return cartQuantity;
+}
+
+export function updateQuantity(productId, newQuantity) {
+    cart.forEach((cartItem) => {
+        if (newQuantity > 1000 && newQuantity < 0) {
+            cartQuantity.quantity = quantity;
+        }
+        if ((cartItem.productId === productId) && (newQuantity < 1000 && newQuantity > 0)) {
+            cartItem.quantity = newQuantity;
+        }
+    });
     saveToStorage();
 }
