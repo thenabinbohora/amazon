@@ -34,9 +34,28 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {
+    return '';
+  };
 }
 
+class Clothing extends Product {
+  sizeChartLink;
 
+  constructor(productDetails) {
+    // call the parent constructor
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML() {
+    //super.extraInfoHTML()
+    return `
+      <a href="${this.sizeChartLink}" target="_blank">Size Chart</a>
+    `;
+  }
+}
 
 export const products = [
   {
@@ -142,7 +161,9 @@ export const products = [
       "hoodies",
       "sweaters",
       "apparel"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "77919bbe-0e56-475b-adde-4f24dfed3a04",
@@ -268,7 +289,9 @@ export const products = [
       "shorts",
       "apparel",
       "mens"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "c2a82c5e-aff4-435f-9975-517cfaba2ece",
@@ -465,7 +488,9 @@ export const products = [
       "pants",
       "apparel",
       "mens"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "1c079479-8586-494f-ab53-219325432536",
@@ -544,7 +569,9 @@ export const products = [
       "jogging",
       "apparel",
       "womens"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "d339adf3-e004-4c20-a120-40e8874c66cb",
@@ -726,4 +753,9 @@ export const products = [
       "bag"
     ]
   }
-].map(productDetails => new Product(productDetails));
+].map((productDetails) => { 
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  }
+  return new Product(productDetails);
+});
