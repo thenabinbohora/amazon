@@ -1,5 +1,5 @@
 class Cart {
-    cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) || [];
+    cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [];
     // # for private properties
     #localStorageKey;
 
