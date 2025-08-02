@@ -11,3 +11,7 @@ export function deliveryDate(deliveryOption) {
     }
     return deliveryDate.format('dddd, MMMM D');
 }
+
+export function formatToMonthDay(dateString) {
+    return dayjs(dateString).format('MMMM D');
+}

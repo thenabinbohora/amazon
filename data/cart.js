@@ -53,7 +53,7 @@ export function updateQuantity(productId, newQuantity) {
     saveToStorage();
 }
 
-function getCartProduct(productId) {
+export function getCartProduct(productId) {
     let matchingItem;
     cart.forEach((cartItem) => {
         if (cartItem.productId === productId) {
@@ -66,6 +66,11 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
     let matchingItem = getCartProduct(productId);
     matchingItem.deliveryOptionId = deliveryOptionId;
     saveToStorage();
+}
+
+export async function loadCartFetch() {
+    const response = await fetch('https://supersimplebackend.dev/cart');
+    return response;
 }
 
 export function loadCart(fun) {
